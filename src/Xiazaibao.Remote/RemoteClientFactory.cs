@@ -15,6 +15,8 @@ namespace Xiazaibao.Remote
 
     public IRemoteClient GetClient(Version version)
     {
+      if (version == null)
+        return new RemoteClient();
       return null;
     }
   }
