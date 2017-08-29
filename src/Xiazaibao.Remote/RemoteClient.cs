@@ -1,13 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Net.Http;
+using System.Security.Cryptography;
 using Xiazaibao.Remote.Models;
+using Xiazaibao.Remote.Utils;
 
 namespace Xiazaibao.Remote
 {
   public class RemoteClient : IRemoteClient
   {
-    public AccessKeyResult GetAccessKey(string username, string password)
+    protected HttpUtils HttpUtils;
+    protected Uri Domain;
+    public RemoteClient(string sessionId, string userid)
     {
-      throw new NotImplementedException();
+      this.Init(sessionId, userid, "http://homecloud.remote.xiazaibao.xunlei.com");
+    }
+
+    public RemoteClient(string sessionId, string userId, string domain)
+    {
+      this.Init(sessionId, userId, domain);
+    }
+
+    protected void Init(string sessionId, string userid, string url)
+    {
+      this.Domain = new Uri(url);
+      HttpClientHandler hander = new HttpClientHandler
+      {
+        CookieContainer = new CookieContainer()
+      };
+      hander.CookieContainer.Add(this.Domain, new Cookie("sessionid", sessionId));
+      hander.CookieContainer.Add(this.Domain, new Cookie("userid", userid));
+      HttpUtils = new HttpUtils(hander, this.Domain);
+    }
+
+    public PeerListResult GetListPeer(int type)
+    {
+      return HttpUtils.Get<PeerListResult>($"/listPeer?type={type}");
+    }
+
+    public TaskListResult GetTaskList(string pid, int type, int number)
+    {
+      return HttpUtils.Get<TaskListResult>($"/list?pid={pid}&type={type}&number={number}&pos=0&v=2&ct=0");
     }
   }
 }
