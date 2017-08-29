@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRemoteClient.cs" />
+    <Compile Include="Models\AccessKeyResult.cs" />
     <Compile Include="Models\BaseResult.cs" />
+    <Compile Include="Models\StatusCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteClient.cs" />
     <Compile Include="RemoteClientFactory.cs" />
     <Compile Include="Utils\HttpUtils.cs" />
   </ItemGroup>
