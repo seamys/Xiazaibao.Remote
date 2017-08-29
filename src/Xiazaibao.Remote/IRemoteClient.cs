@@ -6,8 +6,8 @@ using Xiazaibao.Remote.Models;
 
 namespace Xiazaibao.Remote
 {
-  public interface IRemoteClient
-  {
-    AccessKeyResult GetAccessKey(string username, string password);
-  }
+    public interface IRemoteClient
+    {
+        PeerListResult GetListPeer(int type);
+    }
 }

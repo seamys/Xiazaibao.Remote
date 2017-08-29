@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Xiazaibao.Remote.Tests
 {
-  [TestClass()]
-  public class RemoteClientFactoryTests
-  {
-    [TestMethod()]
-    public void GetClientTest()
+    [TestClass()]
+    public class RemoteClientTests
     {
-      Assert.Fail();
+        [TestMethod()]
+        public void GetListPeerTest()
+        {
+            Assert.Fail();
+        }
     }
-  }
 }
