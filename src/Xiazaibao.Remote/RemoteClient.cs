@@ -13,6 +13,7 @@ namespace Xiazaibao.Remote
   {
     protected HttpUtils HttpUtils;
     protected Uri Domain;
+
     public RemoteClient(string sessionId, string userid)
     {
       this.Init(sessionId, userid, "http://homecloud.remote.xiazaibao.xunlei.com");

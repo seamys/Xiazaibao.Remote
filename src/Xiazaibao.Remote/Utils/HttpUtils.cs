@@ -32,7 +32,6 @@ namespace Xiazaibao.Remote.Utils
             string content = result?.Result;
             return JsonConvert.DeserializeObject<T>(content ?? "{}");
         }
-
         public T Post<T>(string url, string filePath)
         {
             return Post<T>(url, null, filePath);
