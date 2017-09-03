@@ -2,13 +2,11 @@
 
 namespace Xiazaibao.Remote.Models
 {
-    public class TaskListResult
+    public class TaskListResult: BaseResult
     {
         public int RecycleNum { get; set; }
 
         public int ServerFailNum { get; set; }
-
-        public int Rtn { get; set; }
 
         public int CompleteNum { get; set; }
 
