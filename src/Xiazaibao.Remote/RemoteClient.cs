@@ -11,26 +11,43 @@ using Xiazaibao.Remote.Utils;
 
 namespace Xiazaibao.Remote
 {
-    public class RemoteClient : IRemoteClient
-    {
-        protected HttpUtils HttpUtils;
-        protected Uri Domain;
-        public RemoteClient(string sessionId, string userid)
-        {
-            this.Domain = new Uri("http://homecloud.remote.xiazaibao.xunlei.com");
-            HttpClientHandler hander = new HttpClientHandler
-            {
-                CookieContainer = new CookieContainer()
-            };
-            hander.CookieContainer.Add(this.Domain, new Cookie("sessionid", sessionId));
-            hander.CookieContainer.Add(this.Domain, new Cookie("userid", userid));
-            HttpUtils = new HttpUtils(hander, this.Domain);
-        }
-        public PeerListResult GetListPeer(int type)
-        {
-            return HttpUtils.Get<PeerListResult>($"/listPeer?type={type}");
-        }
+  public class RemoteClient : IRemoteClient
+  {
+    protected HttpUtils HttpUtils;
+    protected Uri Domain;
 
+    public RemoteClient(string sessionId, string userid)
+    {
+      this.Init(sessionId, userid, "http://homecloud.remote.xiazaibao.xunlei.com");
+    }
+
+    public RemoteClient(string sessionId, string userId, string domain)
+    {
+      this.Init(sessionId, userId, domain);
+    }
+
+    protected void Init(string sessionId, string userid, string url)
+    {
+      this.Domain = new Uri(url);
+      HttpClientHandler hander = new HttpClientHandler
+      {
+        CookieContainer = new CookieContainer()
+      };
+      hander.CookieContainer.Add(this.Domain, new Cookie("sessionid", sessionId));
+      hander.CookieContainer.Add(this.Domain, new Cookie("userid", userid));
+      HttpUtils = new HttpUtils(hander, this.Domain);
+    }
+
+    public PeerListResult GetListPeer(int type)
+    {
+      return HttpUtils.Get<PeerListResult>($"/listPeer?type={type}");
+    }
+
+    public TaskListResult GetTaskList(string pid, int type, int number)
+    {
+      return HttpUtils.Get<TaskListResult>($"/list?pid={pid}&type={type}&number={number}&pos=0&v=2&ct=0");
+    }
+  }
         /// <summary>
         /// 返回当前正在下载的任务列表
         /// </summary>
