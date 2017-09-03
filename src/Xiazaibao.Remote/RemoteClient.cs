@@ -47,13 +47,6 @@ namespace Xiazaibao.Remote
         {
             return HttpUtils.Get<TaskListResult>($"/list?pid={pid}&type={type}&number={number}&pos=0&v=2&ct=0");
         }
-        /// <summary>
-        /// 返回当前正在下载的任务列表
-        /// </summary>
-        /// <param name="pid"></param>
-        /// <param name="type"></param>
-        /// <param name="number"></param>
-        /// <returns></returns>
 
         public SettingsResult GetConfig(string pid)
         {
@@ -84,10 +77,12 @@ namespace Xiazaibao.Remote
         {
             throw new NotImplementedException();
         }
+
         public TaskListResult List(string pid, int type, int number)
         {
             return HttpUtils.Get<TaskListResult>($"/list?pid={pid}&type={type}&number={number}&pos=0&v=2&ct=0");
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -109,7 +104,7 @@ namespace Xiazaibao.Remote
         /// <returns></returns>
         public BtCheckResult BtCheck(string pid, Stream stream)
         {
-            return HttpUtils.Get<BtCheckResult>("settings", pid);
+            throw new NotImplementedException();
         }
     }
 }
