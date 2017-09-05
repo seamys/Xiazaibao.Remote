@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +34,40 @@ namespace Xiazaibao.Remote.Utils
             string content = result?.Result;
             return JsonConvert.DeserializeObject<T>(content ?? "{}");
         }
+
+        public T Get<T>(string path, string pid)
+        {
+            return Get<T>(GetSimpleUrl(path, pid));
+        }
+
+        public string GetSimpleUrl(string path, string pid)
+        {
+            return $"/{path}?pid={pid}&v=2&ct=0";
+        }
+
+        public T HttpCall<T>(string url, HttpMethod method, IEnumerable<KeyValuePair<string, string>> keyValuePairs)
+        {
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url)
+            {
+                Content = new FormUrlEncodedContent(keyValuePairs),
+                Method = method
+            };
+            Task<string> result = Client.SendAsync(request).Result?.Content?.ReadAsStringAsync();
+            string content = result?.Result;
+            return JsonConvert.DeserializeObject<T>(content ?? "{}");
+        }
+
         public T Post<T>(string url, string filePath)
         {
             return Post<T>(url, null, filePath);
         }
 
-        public T Post<T>(string url, NameValueCollection param, string filePath)
+        public T Post<T>(string url, NameValueCollection param, Stream stream)
+        {
+            return default(T);
+        }
+
+        public T Post<T>(string url, NameValueCollection param)
         {
             return default(T);
         }
@@ -58,5 +88,4 @@ namespace Xiazaibao.Remote.Utils
             Client?.Dispose();
         }
     }
-
 }

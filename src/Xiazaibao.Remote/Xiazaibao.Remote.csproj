@@ -46,9 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRemoteClient.cs" />
+    <Compile Include="Models\BaseResult.cs" />
+    <Compile Include="Models\BoxSpaceResult.cs" />
+    <Compile Include="Models\BtCheckResult.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\PeerListResult.cs" />
+    <Compile Include="Models\RenameResult.cs" />
+    <Compile Include="Models\SettingsResult.cs" />
+    <Compile Include="Models\SpaceInfo.cs" />
     <Compile Include="Models\TaskListResult.cs" />
+    <Compile Include="Models\UrlResolveResult.cs" />
+    <Compile Include="Models\VerifyAccessCodeResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteClient.cs" />
     <Compile Include="Utils\HttpUtils.cs" />
